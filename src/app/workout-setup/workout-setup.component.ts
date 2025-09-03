@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimeInputComponent } from '../time-input/time-input.component';
+import { VolumeControlComponent } from '../volume-control/volume-control.component';
 
 @Component({
   selector: 'app-workout-setup',
-  imports: [TimeInputComponent],
+  imports: [TimeInputComponent, VolumeControlComponent],
   templateUrl: './workout-setup.component.html',
   styleUrl: './workout-setup.component.scss'
 })

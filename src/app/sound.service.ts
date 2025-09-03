@@ -6,10 +6,11 @@ import { Injectable } from '@angular/core';
 export class SoundService {
   private audioContext: AudioContext | null = null;
   private currentOscillators: OscillatorNode[] = [];
+  private volume: number = 0.5; // Domyślna głośność (0-1)
 
   constructor() {
-    // Inicjalizacja AudioContext przy pierwszej interakcji użytkownika
     this.initAudioContext();
+    this.loadVolumeFromStorage();
   }
 
   private initAudioContext() {
@@ -26,6 +27,30 @@ export class SoundService {
     }
     if (this.audioContext?.state === 'suspended') {
       await this.audioContext.resume();
+    }
+  }
+
+  // Metoda do ustawiania głośności
+  setVolume(volume: number) {
+    this.volume = Math.max(0, Math.min(1, volume)); // Upewnij się, że wartość jest między 0-1
+    this.saveVolumeToStorage();
+  }
+
+  // Metoda do pobierania aktualnej głośności
+  getVolume(): number {
+    return this.volume;
+  }
+
+  // Zapisz głośność do localStorage
+  private saveVolumeToStorage() {
+    localStorage.setItem('workout-timer-volume', this.volume.toString());
+  }
+
+  // Wczytaj głośność z localStorage
+  private loadVolumeFromStorage() {
+    const savedVolume = localStorage.getItem('workout-timer-volume');
+    if (savedVolume) {
+      this.volume = parseFloat(savedVolume);
     }
   }
 
@@ -55,8 +80,8 @@ export class SoundService {
     oscillator.frequency.setValueAtTime(800, this.audioContext.currentTime);
     oscillator.type = 'sine';
 
-    gainNode.gain.setValueAtTime(0.1, this.audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.1);
+    gainNode.gain.setValueAtTime(0.8 * this.volume, this.audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01 * this.volume, this.audioContext.currentTime + 0.1);
 
     oscillator.start(this.audioContext.currentTime);
     oscillator.stop(this.audioContext.currentTime + 0.1);
@@ -82,8 +107,8 @@ export class SoundService {
     oscillator.frequency.setValueAtTime(1000, this.audioContext.currentTime + 0.4);
     oscillator.type = 'triangle';
 
-    gainNode.gain.setValueAtTime(0.2, this.audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.6);
+    gainNode.gain.setValueAtTime(1.0 * this.volume, this.audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01 * this.volume, this.audioContext.currentTime + 0.6);
 
     oscillator.start(this.audioContext.currentTime);
     oscillator.stop(this.audioContext.currentTime + 0.6);
@@ -101,6 +126,11 @@ export class SoundService {
 
   // Metoda wywoływana przy zmianie fazy
   playPhaseTransitionSound() {
+    this.playPhaseChangeSound();
+  }
+
+  // Metoda do testowania dźwięku
+  playTestSound() {
     this.playPhaseChangeSound();
   }
 }
