@@ -1,59 +1,180 @@
-# RunnerTimer
+# RunnerTimer 🏃‍♂️⏱️
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+A modern, responsive workout timer application built with Angular. Features interval training with customizable workout and break times, audio notifications, and automatic deployment to GitHub Pages.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-19.2.15-red.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)
+![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-To start a local development server, run:
+## ✨ Features
 
-```bash
-ng serve
+- **⏰ Customizable Timer**: Set your own workout and break durations in seconds
+- **🔄 Interval Training**: Automatic switching between workout and break phases
+- **🔊 Audio Notifications**:
+  - Tick sound during last 5 seconds of each phase
+  - Phase change notification sound
+  - Instant sound stop on pause/reset
+- **📱 Responsive Design**: Optimized for desktop and mobile devices
+- **🎨 Modern UI**: Beautiful gradient design with PrimeNG components
+- **🚀 Auto Deployment**: Automatic deployment to GitHub Pages via GitHub Actions
+- **📊 Session Summary**: Track total workouts and breaks completed
+
+## 🎯 Live Demo
+
+[View Live Application](https://michalszymacha.github.io/RunnerTimer/)
+
+## 📋 Prerequisites
+
+- Node.js 20 or higher
+- npm or yarn
+- GitHub account (for deployment)
+
+## 🚀 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/MichalSzymacha/RunnerTimer.git
+   cd RunnerTimer
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:4200/`
+
+## 🛠️ Development
+
+### Available Scripts
+
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm run watch` - Build and watch for changes
+- `npm test` - Run unit tests
+
+### Project Structure
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── workout-setup/      # Setup screen with time inputs
+│   │   ├── workout-timer/      # Main timer component
+│   │   ├── countdown-timer/    # Timer display component
+│   │   └── time-input/         # Reusable time input component
+│   ├── services/
+│   │   └── sound.service.ts    # Audio notification service
+│   ├── app.config.ts           # Application configuration
+│   ├── app.routes.ts           # Routing configuration
+│   └── app.component.*         # Root component
+├── assets/                     # Static assets
+└── styles.scss                 # Global styles
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🎨 Usage
 
-## Code scaffolding
+1. **Setup Phase**: Enter your desired workout and break times in seconds
+2. **Start Timer**: Click "Start Workout" to begin your interval training
+3. **Timer Phase**: Watch the countdown and listen for audio cues
+4. **Audio Alerts**:
+   - Tick sounds during last 5 seconds of each phase
+   - Phase change sound when switching between workout/break
+5. **Controls**:
+   - **Start**: Begin or resume timer
+   - **Stop**: Pause timer and view summary
+   - **Reset**: Return to setup screen
+6. **Summary**: View total workouts and breaks completed
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🔧 Configuration
+
+### Audio Settings
+The application uses Web Audio API for sound generation:
+- **Tick Sound**: 800Hz sine wave, 0.1 seconds
+- **Phase Change**: 600Hz → 800Hz → 1000Hz triangle wave sequence
+
+### Timer Behavior
+- Automatic phase switching when countdown reaches zero
+- Sound notifications during last 5 seconds
+- Session statistics tracking
+
+## 🚀 Deployment
+
+### Automatic Deployment (GitHub Actions)
+
+The application is automatically deployed to GitHub Pages on every push to the `master` branch.
+
+#### How it works:
+1. **Automatic Build**: GitHub Actions workflow triggers on push to `master`
+2. **Production Build**: Application builds with production configuration
+3. **GitHub Pages**: Files automatically published to `gh-pages` branch
+
+#### Configuration:
+- **Workflow File**: `.github/workflows/deploy.yml`
+- **URL**: `https://MichalSzymacha.github.io/RunnerTimer/`
+- **Routing**: Uses hash-based routing for GitHub Pages compatibility
+
+### Manual Deployment
+
+You can also deploy manually:
 
 ```bash
-ng generate component component-name
+# Build for production
+npm run build -- --configuration production
+
+# Deploy to GitHub Pages
+npx angular-cli-ghpages --dir=dist/runner-timer
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Requirements for Deployment:
+- GitHub repository
+- GitHub Pages enabled in repository settings (branch: `gh-pages`)
+- GitHub Actions workflow configured (already included)
 
-```bash
-ng generate --help
-```
+## 🛠️ Technologies Used
 
-## Building
+- **Framework**: Angular 19.2.15
+- **Language**: TypeScript 5.7.2
+- **Styling**: SCSS with responsive design
+- **UI Components**: PrimeNG with Aura theme
+- **Audio**: Web Audio API
+- **Build Tool**: Angular CLI
+- **Deployment**: GitHub Actions & GitHub Pages
+- **Package Manager**: npm
 
-To build the project run:
+## 📱 Browser Support
 
-```bash
-ng build
-```
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🤝 Contributing
 
-## Running unit tests
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 📄 License
 
-```bash
-ng test
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Running end-to-end tests
+## 🙏 Acknowledgments
 
-For end-to-end (e2e) testing, run:
+- Angular team for the amazing framework
+- PrimeNG for beautiful UI components
+- GitHub for hosting and Actions
+- Web Audio API for sound capabilities
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Made with ❤️ by Michal Szymacha**

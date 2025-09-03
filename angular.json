@@ -38,6 +38,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/RunnerTimer/",
               "budgets": [
                 {
                   "type": "initial",
