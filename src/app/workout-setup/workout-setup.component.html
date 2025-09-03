@@ -1,0 +1,19 @@
+<div class="workout-setup">
+  <h1>Workout Setup</h1>
+
+  <div class="inputs">
+    <app-time-input
+      label="Workout Time (seconds)"
+      [value]="workoutTime"
+      (valueChange)="onWorkoutTimeChange($event)">
+    </app-time-input>
+
+    <app-time-input
+      label="Break Time (seconds)"
+      [value]="breakTime"
+      (valueChange)="onBreakTimeChange($event)">
+    </app-time-input>
+  </div>
+
+  <button (click)="startWorkout()">Start Workout</button>
+</div>

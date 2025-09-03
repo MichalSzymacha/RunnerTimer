@@ -1,0 +1,23 @@
+<div class="workout-timer">
+  <h1>Runner Timer</h1>
+
+  <div *ngIf="!showSummary">
+    <app-countdown-timer
+      [time]="currentTime"
+      [isWorkoutPhase]="isWorkoutPhase">
+    </app-countdown-timer>
+
+    <div class="buttons">
+      <button (click)="startTimer()" [disabled]="isRunning">Start</button>
+      <button (click)="stopTimer()" [disabled]="!isRunning">Stop</button>
+      <button (click)="resetTimer()">Reset</button>
+    </div>
+  </div>
+
+  <div *ngIf="showSummary" class="summary">
+    <h2>Summary</h2>
+    <p>Total workouts: {{ totalWorkouts }}</p>
+    <p>Total breaks: {{ totalBreaks }}</p>
+    <button (click)="resetTimer()">Back to settings</button>
+  </div>
+</div>

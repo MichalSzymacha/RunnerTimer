@@ -1,0 +1,30 @@
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsywność dla urządzeń mobilnych */
+@media (max-width: 768px) {
+  input {
+    padding: 12px;
+    font-size: 18px; /* Zapobiega zoomowaniu na iOS */
+  }
+}
